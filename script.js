@@ -63,17 +63,17 @@ if (contactForm) {
     const originalText = button ? button.textContent : "";
     if (button) {
       button.disabled = true;
-      button.textContent = "Sending...";
+      button.textContent = "Enviando...";
     }
 
     // Simple simulated submit
     setTimeout(() => {
       if (button) {
         button.disabled = false;
-        button.textContent = originalText || "Send request";
+        button.textContent = originalText || "Enviar solicitação";
       }
       contactForm.reset();
-      alert("Thanks for reaching out! We will get back to you within one business day.");
+      alert("Obrigado pelo contato! Responderemos em até um dia útil.");
     }, 900);
   });
 }
