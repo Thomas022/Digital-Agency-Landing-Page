@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://essede.com.br/sitemap.xml
