@@ -52,37 +52,60 @@ if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
 }
 
-// SECTION: Contact form (demo only)
+// SECTION: Contact form (EmailJS)
 const contactForm = document.querySelector(".contact-form");
+const emailjsConfig = {
+  publicKey: "lDCksyLUUsAu7SI8U",
+  serviceId: "service_mmi0x1c",
+  templateId: "template_au9cyvb",
+};
 
 if (contactForm) {
-  contactForm.addEventListener("submit", (event) => {
+  let isSending = false;
+  const formStatus = contactForm.querySelector(".form-status");
+
+  contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (isSending || !contactForm.reportValidity()) return;
 
     const button = contactForm.querySelector("button[type='submit']");
     const originalText = button ? button.textContent : "";
+    isSending = true;
+    contactForm.setAttribute("aria-busy", "true");
+    if (formStatus) formStatus.textContent = "Enviando sua solicitação...";
     if (button) {
       button.disabled = true;
       button.textContent = "Enviando...";
     }
 
-    // Envio real via EmailJS
-    emailjs.sendForm("service_mmi0x1c", "template_au9cyvb", contactForm)
-      .then(() => {
-        if (button) {
-          button.disabled = false;
-          button.textContent = originalText || "Enviar solicitação";
-        }
-        contactForm.reset();
-        alert("Obrigado pelo contato! Responderemos em até um dia útil.");
-      })
-      .catch((error) => {
-        console.error("Erro ao enviar:", error);
-        if (button) {
-          button.disabled = false;
-          button.textContent = originalText || "Enviar solicitação";
-        }
-        alert("Ocorreu um erro ao enviar. Tente novamente.");
+    try {
+      if (typeof window.emailjs?.sendForm !== "function") {
+        throw new Error("A biblioteca EmailJS não carregou. Verifique a conexão e o acesso ao CDN.");
+      }
+
+      // Os atributos name do HTML devem corresponder às variáveis do template.
+      await window.emailjs.sendForm(emailjsConfig.serviceId, emailjsConfig.templateId, contactForm, {
+        publicKey: emailjsConfig.publicKey,
       });
+      contactForm.reset();
+      if (formStatus) formStatus.textContent = "Obrigado pelo contato! Responderemos em até um dia útil.";
+    } catch (error) {
+      console.error("Erro ao enviar pelo EmailJS:", {
+        status: error?.status,
+        text: error?.text || error?.message || String(error),
+      });
+      if (formStatus) {
+        formStatus.textContent = typeof window.emailjs?.sendForm !== "function"
+          ? "Não foi possível carregar o serviço de envio. Recarregue a página e tente novamente."
+          : "Não foi possível enviar sua solicitação. Seus dados foram mantidos; tente novamente em instantes.";
+      }
+    } finally {
+      isSending = false;
+      contactForm.setAttribute("aria-busy", "false");
+      if (button) {
+        button.disabled = false;
+        button.textContent = originalText || "Enviar solicitação";
+      }
+    }
   });
 }
