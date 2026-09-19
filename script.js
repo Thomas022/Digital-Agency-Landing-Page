@@ -66,15 +66,23 @@ if (contactForm) {
       button.textContent = "Enviando...";
     }
 
-    // Simple simulated submit
-    setTimeout(() => {
-      if (button) {
-        button.disabled = false;
-        button.textContent = originalText || "Enviar solicitação";
-      }
-      contactForm.reset();
-      alert("Obrigado pelo contato! Responderemos em até um dia útil.");
-    }, 900);
+    // Envio real via EmailJS
+    emailjs.sendForm("service_mmi0x1c", "template_au9cyvb", contactForm)
+      .then(() => {
+        if (button) {
+          button.disabled = false;
+          button.textContent = originalText || "Enviar solicitação";
+        }
+        contactForm.reset();
+        alert("Obrigado pelo contato! Responderemos em até um dia útil.");
+      })
+      .catch((error) => {
+        console.error("Erro ao enviar:", error);
+        if (button) {
+          button.disabled = false;
+          button.textContent = originalText || "Enviar solicitação";
+        }
+        alert("Ocorreu um erro ao enviar. Tente novamente.");
+      });
   });
 }
-
