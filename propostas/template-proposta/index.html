@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#07121f" />
+    <title>{{TITULO_PROPOSTA}} | EsseDe Digital × {{NOME_CLIENTE}}</title>
+    <meta
+      name="description"
+      content="Proposta estratégica da EsseDe Digital para {{NOME_CLIENTE}}: {{RESUMO_META}}"
+    />
+    <link rel="icon" href="../../Logo_pictures/essede-logo-transparent.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="proposal.css" />
+  </head>
+  <body>
+    <!--
+      TEMPLATE DE PROPOSTA — ESSEDE DIGITAL
+
+      Como usar:
+      1. Duplique a pasta "template-proposta" e renomeie a cópia com o cliente.
+      2. Substitua todos os placeholders no formato {{NOME_DO_CAMPO}}.
+      3. Adapte oportunidades, entregáveis, cronograma e indicadores ao diagnóstico.
+      4. Revise links, investimento, validade e informações de contato.
+      5. Abra no navegador e use "Salvar em PDF" para gerar a versão anexável.
+
+      A lista completa de placeholders está no arquivo README.md desta pasta.
+    -->
+
+    <!-- SECTION: Barra superior — marca, navegação curta e ação de exportar para PDF. -->
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="EsseDe Digital — início">
+        <img src="../../Logo_pictures/essede-logo-transparent.png" alt="" />
+        <span>EsseDe <strong>Digital</strong></span>
+      </a>
+      <!-- Menu recolhível em celular/tablet, com estado anunciado ao leitor de tela. -->
+      <button class="menu-toggle" type="button" aria-controls="proposal-navigation" aria-expanded="false" aria-label="Abrir menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav id="proposal-navigation" aria-label="Navegação da proposta">
+        <a href="#oportunidades">Oportunidades</a>
+        <a href="#solucao">Solução</a>
+        <a href="#plano">Plano</a>
+      </nav>
+      <button class="print-button" type="button" data-print>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M7 14h10v7H7z"/></svg>
+        Salvar em PDF
+      </button>
+    </header>
+
+    <main id="inicio">
+      <!-- SECTION: Capa — comunica a tese central da proposta e identifica cliente, foco e prazo. -->
+      <section class="hero section-shell">
+        <div class="hero-copy reveal">
+          <p class="kicker">{{TIPO_PROPOSTA}}</p>
+          <h1>{{TITULO_PRINCIPAL}} <em>{{DESTAQUE_TITULO}}</em></h1>
+          <p class="lead">
+            {{RESUMO_PROPOSTA}}
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#solucao">Conhecer a proposta</a>
+            <a class="button secondary" href="#proximos-passos">Próximos passos</a>
+          </div>
+        </div>
+
+        <aside class="proposal-card reveal" aria-label="Informações da proposta">
+          <div class="card-glow"></div>
+          <p class="card-label">Preparado especialmente para</p>
+          <h2>{{NOME_CLIENTE}}</h2>
+          <dl>
+            <div><dt>Por</dt><dd>EsseDe Digital</dd></div>
+            <div><dt>Foco</dt><dd>{{FOCO_PROJETO}}</dd></div>
+            <div><dt>Horizonte</dt><dd>{{DURACAO_PROJETO}}</dd></div>
+            <div><dt>Validade</dt><dd>{{VALIDADE_PROPOSTA}}</dd></div>
+          </dl>
+          <span class="confidential">Confidencial · Uso exclusivo</span>
+        </aside>
+      </section>
+
+      <!-- SECTION: Introdução — contextualiza o momento do cliente e conecta o diagnóstico à oportunidade. -->
+      <section class="intro section-shell reveal" aria-labelledby="intro-title">
+        <div>
+          <p class="kicker">Introdução</p>
+          <h2 id="intro-title">{{TITULO_INTRODUCAO}}</h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            {{INTRODUCAO_PARAGRAFO_1}}
+          </p>
+          <p>
+            {{INTRODUCAO_PARAGRAFO_2}}
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION: Oportunidades — resume quatro necessidades observadas e seus possíveis desdobramentos. -->
+      <section id="oportunidades" class="section-shell section-block" aria-labelledby="opportunities-title">
+        <header class="section-heading reveal">
+          <p class="kicker">Oportunidades</p>
+          <h2 id="opportunities-title">{{TITULO_OPORTUNIDADES}}</h2>
+          <p>{{RESUMO_OPORTUNIDADES}}</p>
+        </header>
+
+        <div class="opportunity-grid">
+          <article class="opportunity-card reveal">
+            <span class="number">01</span>
+            <div class="icon-box" aria-hidden="true">↗</div>
+            <h3>{{OPORTUNIDADE_1_TITULO}}</h3>
+            <p>{{OPORTUNIDADE_1_DESCRICAO}}</p>
+            <ul>
+              <li>{{OPORTUNIDADE_1_ITEM_1}}</li>
+              <li>{{OPORTUNIDADE_1_ITEM_2}}</li>
+              <li>{{OPORTUNIDADE_1_ITEM_3}}</li>
+            </ul>
+          </article>
+
+          <article class="opportunity-card reveal">
+            <span class="number">02</span>
+            <div class="icon-box" aria-hidden="true">◎</div>
+            <h3>{{OPORTUNIDADE_2_TITULO}}</h3>
+            <p>{{OPORTUNIDADE_2_DESCRICAO}}</p>
+            <ul>
+              <li>{{OPORTUNIDADE_2_ITEM_1}}</li>
+              <li>{{OPORTUNIDADE_2_ITEM_2}}</li>
+              <li>{{OPORTUNIDADE_2_ITEM_3}}</li>
+            </ul>
+          </article>
+
+          <article class="opportunity-card reveal">
+            <span class="number">03</span>
+            <div class="icon-box" aria-hidden="true">⌘</div>
+            <h3>{{OPORTUNIDADE_3_TITULO}}</h3>
+            <p>{{OPORTUNIDADE_3_DESCRICAO}}</p>
+            <ul>
+              <li>{{OPORTUNIDADE_3_ITEM_1}}</li>
+              <li>{{OPORTUNIDADE_3_ITEM_2}}</li>
+              <li>{{OPORTUNIDADE_3_ITEM_3}}</li>
+            </ul>
+          </article>
+
+          <article class="opportunity-card reveal">
+            <span class="number">04</span>
+            <div class="icon-box" aria-hidden="true">✦</div>
+            <h3>{{OPORTUNIDADE_4_TITULO}}</h3>
+            <p>{{OPORTUNIDADE_4_DESCRICAO}}</p>
+            <ul>
+              <li>{{OPORTUNIDADE_4_ITEM_1}}</li>
+              <li>{{OPORTUNIDADE_4_ITEM_2}}</li>
+              <li>{{OPORTUNIDADE_4_ITEM_3}}</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION: Solução — apresenta o nome do projeto e seis entregáveis concretos. -->
+      <section id="solucao" class="solution section-block">
+        <div class="section-shell">
+          <header class="section-heading light reveal">
+            <p class="kicker">Solução proposta</p>
+            <h2>{{NOME_PROJETO}}</h2>
+            <p>{{DESCRICAO_PROJETO}}</p>
+          </header>
+
+          <div class="deliverables reveal">
+            <div class="deliverable">
+              <span>01</span><div><h3>{{ENTREGA_1_TITULO}}</h3><p>{{ENTREGA_1_DESCRICAO}}</p></div>
+            </div>
+            <div class="deliverable">
+              <span>02</span><div><h3>{{ENTREGA_2_TITULO}}</h3><p>{{ENTREGA_2_DESCRICAO}}</p></div>
+            </div>
+            <div class="deliverable">
+              <span>03</span><div><h3>{{ENTREGA_3_TITULO}}</h3><p>{{ENTREGA_3_DESCRICAO}}</p></div>
+            </div>
+            <div class="deliverable">
+              <span>04</span><div><h3>{{ENTREGA_4_TITULO}}</h3><p>{{ENTREGA_4_DESCRICAO}}</p></div>
+            </div>
+            <div class="deliverable">
+              <span>05</span><div><h3>{{ENTREGA_5_TITULO}}</h3><p>{{ENTREGA_5_DESCRICAO}}</p></div>
+            </div>
+            <div class="deliverable">
+              <span>06</span><div><h3>{{ENTREGA_6_TITULO}}</h3><p>{{ENTREGA_6_DESCRICAO}}</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: Plano — organiza a implementação em três fases e explicita os marcos do projeto. -->
+      <section id="plano" class="section-shell section-block" aria-labelledby="plan-title">
+        <header class="section-heading reveal">
+          <p class="kicker">Plano de implementação</p>
+          <h2 id="plan-title">{{TITULO_CRONOGRAMA}}</h2>
+          <p>{{DESCRICAO_CRONOGRAMA}}</p>
+        </header>
+
+        <div class="timeline">
+          <article class="phase reveal">
+            <div class="phase-marker"><span>01</span></div>
+            <div class="phase-copy">
+              <p class="phase-time">{{FASE_1_PERIODO}}</p>
+              <h3>{{FASE_1_TITULO}}</h3>
+              <p>{{FASE_1_DESCRICAO}}</p>
+              <div class="phase-tags"><span>{{FASE_1_TAG_1}}</span><span>{{FASE_1_TAG_2}}</span><span>{{FASE_1_TAG_3}}</span></div>
+            </div>
+          </article>
+          <article class="phase reveal">
+            <div class="phase-marker"><span>02</span></div>
+            <div class="phase-copy">
+              <p class="phase-time">{{FASE_2_PERIODO}}</p>
+              <h3>{{FASE_2_TITULO}}</h3>
+              <p>{{FASE_2_DESCRICAO}}</p>
+              <div class="phase-tags"><span>{{FASE_2_TAG_1}}</span><span>{{FASE_2_TAG_2}}</span><span>{{FASE_2_TAG_3}}</span></div>
+            </div>
+          </article>
+          <article class="phase reveal">
+            <div class="phase-marker"><span>03</span></div>
+            <div class="phase-copy">
+              <p class="phase-time">{{FASE_3_PERIODO}}</p>
+              <h3>{{FASE_3_TITULO}}</h3>
+              <p>{{FASE_3_DESCRICAO}}</p>
+              <div class="phase-tags"><span>{{FASE_3_TAG_1}}</span><span>{{FASE_3_TAG_2}}</span><span>{{FASE_3_TAG_3}}</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION: Indicadores — define como o sucesso será acompanhado sem prometer resultados sem linha de base. -->
+      <section class="metrics section-shell section-block" aria-labelledby="metrics-title">
+        <div class="metrics-intro reveal">
+          <p class="kicker">Critérios de sucesso</p>
+          <h2 id="metrics-title">{{TITULO_INDICADORES}}</h2>
+          <p>{{DESCRICAO_INDICADORES}}</p>
+        </div>
+        <div class="metrics-grid reveal">
+          <div><strong>01</strong><span>{{INDICADOR_1}}</span></div>
+          <div><strong>02</strong><span>{{INDICADOR_2}}</span></div>
+          <div><strong>03</strong><span>{{INDICADOR_3}}</span></div>
+          <div><strong>04</strong><span>{{INDICADOR_4}}</span></div>
+          <div><strong>05</strong><span>{{INDICADOR_5}}</span></div>
+          <div><strong>06</strong><span>{{INDICADOR_6}}</span></div>
+        </div>
+      </section>
+
+      <!-- SECTION: Condições comerciais — resume duração, formato, investimento e premissas. -->
+      <section class="commercial section-shell section-block" aria-labelledby="commercial-title">
+        <div class="commercial-card reveal">
+          <div>
+            <p class="kicker">Modelo de contratação</p>
+            <h2 id="commercial-title">{{TITULO_CONTRATACAO}}</h2>
+            <p>{{DESCRICAO_CONTRATACAO}}</p>
+          </div>
+          <dl>
+            <div><dt>Duração</dt><dd>{{DURACAO_PROJETO}}</dd></div>
+            <div><dt>Formato</dt><dd>{{FORMATO_PROJETO}}</dd></div>
+            <div><dt>Investimento</dt><dd>{{INVESTIMENTO}}</dd></div>
+          </dl>
+        </div>
+        <p class="scope-note reveal"><strong>Premissa:</strong> {{PREMISSA_COMERCIAL}}</p>
+      </section>
+
+      <!-- SECTION: Encerramento — encerra a narrativa com uma ação única e objetiva. -->
+      <section id="proximos-passos" class="closing section-shell">
+        <div class="closing-card reveal">
+          <p class="kicker">Próximos passos</p>
+          <h2>{{TITULO_CTA}}</h2>
+          <p>{{DESCRICAO_CTA}}</p>
+          <div class="hero-actions">
+            <a
+              class="button primary"
+              href="{{LINK_AGENDAMENTO}}"
+            >Agendar conversa</a>
+            <button class="button secondary" type="button" data-print>Baixar proposta em PDF</button>
+          </div>
+          <small>{{CONTATO_COMERCIAL}} · essede.com.br</small>
+        </div>
+      </section>
+    </main>
+
+    <!-- SECTION: Rodapé — reforça autoria, posicionamento e ano da proposta. -->
+    <footer>
+      <div class="section-shell footer-inner">
+        <a class="brand" href="#inicio"><span>EsseDe <strong>Digital</strong></span></a>
+        <p>Estratégia digital · Engenharia de software · Dados & IA</p>
+        <p>© <span data-year></span> EsseDe Digital</p>
+      </div>
+    </footer>
+
+    <script src="proposal.js"></script>
+  </body>
+</html>

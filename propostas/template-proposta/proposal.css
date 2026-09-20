@@ -1,0 +1,334 @@
+/* SECTION: Design tokens — cores, tipografia e largura máxima do template. */
+:root {
+  --ink: #0a1b2b;
+  --ink-soft: #536372;
+  --paper: #f6f3ed;
+  --white: #fffdf9;
+  --navy: #07121f;
+  --navy-light: #0d2538;
+  --blue: #1f7598;
+  --cyan: #59bfd0;
+  --mint: #9de0d3;
+  --gold: #c8a969;
+  --line: rgba(10, 27, 43, 0.14);
+  --display: "Manrope", sans-serif;
+  --body: "DM Sans", sans-serif;
+  --shell: min(1160px, calc(100% - 48px));
+}
+
+/* SECTION: Base — normalização, tipografia global e elementos compartilhados. */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--navy); }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button, a { -webkit-tap-highlight-color: transparent; }
+.section-shell { width: var(--shell); margin-inline: auto; }
+
+/* SECTION: Barra superior — navegação fixa e ação para impressão. */
+.topbar {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 76px;
+  padding: 0 max(24px, calc((100vw - 1160px) / 2));
+  color: white;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  background: rgba(7,18,31,.92);
+  backdrop-filter: blur(18px);
+}
+.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 600; }
+.brand img { width: 31px; height: 31px; object-fit: contain; }
+.brand strong { color: var(--cyan); }
+.topbar nav { display: flex; gap: 30px; font-size: 14px; color: rgba(255,255,255,.72); }
+.topbar nav a:hover { color: white; }
+.menu-toggle { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; color: white; background: transparent; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; cursor: pointer; }
+.menu-toggle svg { width: 22px; fill: none; stroke: currentColor; stroke-width: 2; }
+.print-button {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  color: white;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+.print-button svg { width: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+/* SECTION: Capa — grade principal, fundo editorial e cartão de identificação. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 1.35fr .65fr;
+  gap: 80px;
+  min-height: 710px;
+  align-items: center;
+  color: white;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 calc((100% - 100vw) / 2);
+  background:
+    radial-gradient(circle at 80% 25%, rgba(89,191,208,.22), transparent 27%),
+    radial-gradient(circle at 17% 70%, rgba(31,117,152,.22), transparent 31%),
+    linear-gradient(135deg, #07121f, #0a2132 65%, #081620);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+.hero-copy { position: relative; z-index: 1; padding: 80px 0 100px; }
+.kicker { margin: 0 0 20px; color: var(--blue); font: 700 12px/1 var(--display); letter-spacing: .16em; text-transform: uppercase; }
+.hero .kicker, .solution .kicker, .closing .kicker { color: var(--cyan); }
+h1, h2, h3 { font-family: var(--display); line-height: 1.08; letter-spacing: -.035em; }
+h1 { max-width: 780px; margin: 0; font-size: clamp(48px, 6vw, 78px); font-weight: 600; }
+h1 em { color: var(--mint); font-style: normal; }
+.lead { max-width: 690px; margin: 30px 0 0; color: rgba(255,255,255,.7); font-size: 19px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 38px; }
+.button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 21px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font: 700 14px var(--display);
+  cursor: pointer;
+}
+.button.primary { color: var(--navy); background: var(--mint); }
+.button.primary:hover { background: #b9eee3; transform: translateY(-1px); }
+.button.secondary { color: inherit; border-color: currentColor; background: transparent; opacity: .78; }
+.button.secondary:hover { opacity: 1; }
+
+.proposal-card {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding: 34px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 3px;
+  background: rgba(255,255,255,.055);
+  box-shadow: 0 28px 80px rgba(0,0,0,.28);
+  backdrop-filter: blur(14px);
+}
+.card-glow { position: absolute; right: -80px; top: -80px; width: 190px; height: 190px; border-radius: 50%; background: rgba(89,191,208,.18); filter: blur(20px); }
+.card-label { margin: 0 0 18px; color: rgba(255,255,255,.55); font-size: 13px; }
+.proposal-card h2 { margin: 0 0 38px; font-size: 34px; font-weight: 600; }
+.proposal-card dl { margin: 0; }
+.proposal-card dl div { display: grid; grid-template-columns: 88px 1fr; padding: 13px 0; border-top: 1px solid rgba(255,255,255,.12); font-size: 14px; }
+.proposal-card dt { color: rgba(255,255,255,.48); }
+.proposal-card dd { margin: 0; }
+.confidential { display: inline-block; margin-top: 34px; color: var(--mint); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+
+/* SECTION: Introdução — contexto dividido em título e narrativa. */
+.intro { display: grid; grid-template-columns: .85fr 1.15fr; gap: 100px; padding: 125px 0; border-bottom: 1px solid var(--line); }
+.intro h2, .section-heading h2, .metrics h2, .commercial h2 { margin: 0; font-size: clamp(34px, 4vw, 52px); font-weight: 600; }
+.intro-copy { padding-top: 30px; color: var(--ink-soft); font-size: 18px; }
+.intro-copy p:first-child { margin-top: 0; color: var(--ink); }
+
+/* SECTION: Oportunidades — cabeçalho padrão e cartões do diagnóstico. */
+.section-block { padding: 120px 0; }
+.section-heading { max-width: 720px; margin-bottom: 55px; }
+.section-heading > p:last-child { color: var(--ink-soft); font-size: 18px; }
+.opportunity-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.opportunity-card { position: relative; padding: 38px; border: 1px solid var(--line); background: rgba(255,253,249,.62); }
+.opportunity-card .number { position: absolute; top: 22px; right: 24px; color: rgba(10,27,43,.26); font: 600 12px var(--display); }
+.icon-box { display: grid; width: 42px; height: 42px; place-items: center; margin-bottom: 34px; color: var(--blue); border: 1px solid rgba(31,117,152,.25); background: rgba(89,191,208,.09); }
+.opportunity-card h3 { margin: 0 0 15px; font-size: 25px; }
+.opportunity-card p { color: var(--ink-soft); }
+.opportunity-card ul { margin: 25px 0 0; padding: 20px 0 0; border-top: 1px solid var(--line); list-style: none; }
+.opportunity-card li { position: relative; padding: 5px 0 5px 20px; font-size: 14px; }
+.opportunity-card li::before { content: ""; position: absolute; left: 0; top: 14px; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); }
+
+/* SECTION: Solução — faixa escura com os entregáveis do projeto. */
+.solution { color: white; background: var(--navy); }
+.section-heading.light > p:last-child { color: rgba(255,255,255,.6); }
+.deliverables { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid rgba(255,255,255,.13); }
+.deliverable { display: grid; grid-template-columns: 46px 1fr; gap: 22px; padding: 31px 32px 31px 0; border-bottom: 1px solid rgba(255,255,255,.13); }
+.deliverable:nth-child(odd) { border-right: 1px solid rgba(255,255,255,.13); }
+.deliverable:nth-child(even) { padding-left: 32px; }
+.deliverable > span { color: var(--cyan); font: 600 12px var(--display); }
+.deliverable h3 { margin: 0 0 8px; font-size: 20px; }
+.deliverable p { margin: 0; color: rgba(255,255,255,.58); font-size: 14px; }
+
+/* SECTION: Plano — linha do tempo das fases de implementação. */
+.timeline { border-top: 1px solid var(--line); }
+.phase { display: grid; grid-template-columns: 150px 1fr; border-bottom: 1px solid var(--line); }
+.phase-marker { padding: 38px 0; }
+.phase-marker span { display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--blue); font: 700 13px var(--display); }
+.phase-copy { display: grid; grid-template-columns: 140px 1fr 1.2fr; gap: 30px; align-items: center; padding: 38px 0; }
+.phase-time { margin: 0; color: var(--blue); font: 700 12px var(--display); text-transform: uppercase; letter-spacing: .08em; }
+.phase h3 { margin: 0; font-size: 24px; }
+.phase-copy > p:not(.phase-time) { margin: 0; color: var(--ink-soft); font-size: 14px; }
+.phase-tags { grid-column: 2 / -1; display: flex; gap: 8px; margin-top: -12px; }
+.phase-tags span { padding: 5px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-soft); font-size: 11px; }
+
+/* SECTION: Indicadores — critérios usados para acompanhar o sucesso. */
+.metrics { display: grid; grid-template-columns: .8fr 1.2fr; gap: 90px; border-top: 1px solid var(--line); }
+.metrics-intro > p:last-child { color: var(--ink-soft); }
+.metrics-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+.metrics-grid div { min-height: 130px; padding: 23px; border-left: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.metrics-grid strong { display: block; margin-bottom: 22px; color: var(--blue); font: 700 11px var(--display); }
+.metrics-grid span { font-weight: 500; }
+
+/* SECTION: Condições comerciais — resumo de formato, prazo e investimento. */
+.commercial { padding-top: 30px; }
+.commercial-card { display: grid; grid-template-columns: 1.3fr .7fr; gap: 80px; padding: 55px; color: white; background: linear-gradient(135deg, var(--navy-light), var(--navy)); }
+.commercial-card > div > p:last-child { max-width: 650px; color: rgba(255,255,255,.62); }
+.commercial-card dl { margin: 0; }
+.commercial-card dl div { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.13); }
+.commercial-card dt { color: rgba(255,255,255,.45); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.commercial-card dd { margin: 3px 0 0; font: 600 17px var(--display); }
+.scope-note { color: var(--ink-soft); font-size: 13px; }
+
+/* SECTION: Encerramento — chamada final e ação de agendamento. */
+.closing { padding: 80px 0 120px; }
+.closing-card { position: relative; overflow: hidden; padding: 80px; color: white; text-align: center; background: var(--navy); }
+.closing-card::after { content: ""; position: absolute; left: 50%; bottom: -180px; width: 500px; height: 300px; transform: translateX(-50%); border-radius: 50%; background: rgba(89,191,208,.16); filter: blur(30px); }
+.closing h2 { position: relative; z-index: 1; max-width: 830px; margin: auto; font-size: clamp(38px, 5vw, 62px); }
+.closing-card > p:not(.kicker) { position: relative; z-index: 1; max-width: 650px; margin: 25px auto 0; color: rgba(255,255,255,.62); }
+.closing .hero-actions { position: relative; z-index: 1; justify-content: center; }
+.closing small { position: relative; z-index: 1; display: block; margin-top: 25px; color: rgba(255,255,255,.42); }
+
+/* SECTION: Rodapé e animações de entrada. */
+footer { padding: 30px 0; color: rgba(255,255,255,.62); background: #040c14; font-size: 12px; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* SECTION: Tema de tela — fundo contínuo e contraste consistente ao rolar.
+   As cores de impressão continuam independentes para manter o PDF legível. */
+@media screen {
+  :root {
+    --ink: #edf4fa;
+    --ink-soft: #b7c8d6;
+    --paper: #07121f;
+    --blue: #79cede;
+    --line: rgba(183,200,214,.22);
+  }
+  html { color-scheme: dark; scrollbar-color: #536f84 var(--navy); }
+  body { overflow-x: clip; }
+  section[id] { scroll-margin-top: 96px; }
+  .section-shell { overflow-wrap: anywhere; }
+  .hero > *, .intro > *, .metrics > *, .commercial-card > *,
+  .phase-copy > *, .deliverable > * { min-width: 0; }
+  .opportunity-card { background: #0d2131; }
+  .opportunity-card .number { color: #abc2d3; }
+  .icon-box { border-color: rgba(121,206,222,.35); }
+  .topbar nav, .lead, .card-label, .proposal-card dt,
+  .section-heading.light > p:last-child, .deliverable p,
+  .commercial-card > div > p:last-child, .commercial-card dt,
+  .closing-card > p:not(.kicker), .closing small, footer {
+    color: #b7c8d6;
+  }
+  .commercial .kicker { color: var(--cyan); }
+  .button.secondary { opacity: 1; }
+  .phase-tags { flex-wrap: wrap; }
+  :focus-visible { outline: 2px solid var(--mint); outline-offset: 4px; }
+}
+
+/* SECTION: Responsividade — adaptações para tablets e celulares. */
+@media (max-width: 900px) {
+  .topbar { grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; }
+  .menu-toggle { display: inline-flex; }
+  .topbar nav { display: none; position: absolute; top: 100%; left: 0; right: 0; padding: 12px 20px; background: var(--navy); border-bottom: 1px solid var(--line); box-shadow: 0 12px 24px rgba(0,0,0,.3); }
+  .topbar nav.is-open { display: flex; flex-direction: column; gap: 4px; }
+  .topbar nav a { display: flex; align-items: center; min-height: 48px; padding: 8px 12px; border-radius: 8px; }
+  .topbar nav a:hover { background: var(--navy-light); }
+  .topbar .print-button { min-width: 44px; min-height: 44px; justify-content: center; }
+  .hero { grid-template-columns: 1fr; gap: 0; padding-bottom: 80px; }
+  .hero-copy { padding-bottom: 50px; }
+  .proposal-card { max-width: 520px; }
+  .intro, .metrics { grid-template-columns: 1fr; gap: 30px; }
+  .opportunity-grid { grid-template-columns: 1fr; }
+  .phase-copy { grid-template-columns: 110px 1fr; }
+  .phase-copy > p:not(.phase-time) { grid-column: 2; }
+  .commercial-card { grid-template-columns: 1fr; gap: 30px; }
+}
+
+@media (max-width: 620px) {
+  :root { --shell: min(100% - 28px, 1160px); }
+  .topbar { min-height: 66px; padding-inline: 14px; }
+  .print-button { padding: 8px 10px; font-size: 0; }
+  .hero { min-height: auto; }
+  .hero-copy { padding-top: 65px; }
+  h1 { font-size: 43px; }
+  .lead { font-size: 17px; }
+  .proposal-card { padding: 26px; }
+  .intro, .section-block { padding: 82px 0; }
+  .intro-copy { padding-top: 0; }
+  .opportunity-card { padding: 28px; }
+  .deliverables { grid-template-columns: 1fr; }
+  .deliverable, .deliverable:nth-child(even) { padding: 26px 0; border-right: 0; }
+  .phase { grid-template-columns: 60px 1fr; }
+  .phase-copy { grid-template-columns: 1fr; gap: 8px; }
+  .phase-copy > p:not(.phase-time), .phase-tags { grid-column: 1; }
+  .phase-tags { margin-top: 10px; flex-wrap: wrap; }
+  .metrics-grid { grid-template-columns: 1fr; }
+  .commercial-card, .closing-card { padding: 38px 26px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* SECTION: Impressão — converte a proposta para uma versão limpa em PDF/A4. */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  html { background: white; color-scheme: light; }
+  body { color: #111; background: white; font-size: 10pt; }
+  .topbar, .hero-actions, .print-button { display: none !important; }
+  .section-shell { width: 100%; }
+  .hero { min-height: auto; grid-template-columns: 1.25fr .75fr; gap: 25px; padding: 20mm 0 14mm; color: #111; border-bottom: 1px solid #ccc; }
+  .hero::before, .hero::after, .card-glow { display: none; }
+  .hero-copy { padding: 0; }
+  h1 { font-size: 28pt; }
+  h1 em, .hero .kicker, .solution .kicker, .closing .kicker { color: #176887; }
+  .lead { color: #444; font-size: 11pt; }
+  .proposal-card { padding: 18px; color: #111; border: 1px solid #bbb; box-shadow: none; background: #f5f5f5; }
+  .proposal-card h2 { margin-bottom: 14px; font-size: 18pt; }
+  .proposal-card dl div { padding: 5px 0; border-color: #ddd; }
+  .proposal-card dt { color: #666; }
+  .confidential { margin-top: 12px; color: #176887; }
+  .intro, .section-block { padding: 15mm 0; }
+  .intro { gap: 20px; }
+  .intro h2, .section-heading h2, .metrics h2, .commercial h2 { font-size: 22pt; }
+  .opportunity-card { break-inside: avoid; padding: 18px; background: white; }
+  .solution { color: #111; background: white; border-top: 2px solid #111; border-bottom: 2px solid #111; }
+  .section-heading.light > p:last-child, .deliverable p { color: #555; }
+  .deliverables { border-color: #ccc; }
+  .deliverable, .deliverable:nth-child(odd) { border-color: #ccc; }
+  .phase, .metrics-grid div { break-inside: avoid; }
+  .commercial-card, .closing-card { color: #111; background: #f1f3f4; }
+  .commercial-card > div > p:last-child, .closing-card > p:not(.kicker), .closing small { color: #555; }
+  .commercial-card dl div { border-color: #ccc; }
+  .commercial-card dt { color: #666; }
+  .closing { padding: 14mm 0 0; }
+  footer { margin-top: 12mm; padding: 8mm 0 0; color: #555; background: white; border-top: 1px solid #ccc; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}

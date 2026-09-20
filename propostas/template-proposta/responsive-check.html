@@ -1,0 +1,7 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>Teste responsivo</title>
+<style>body{margin:20px;background:#07121f;color:white;font:16px system-ui}iframe{border:1px solid #536372;display:block;margin-bottom:30px}pre{white-space:pre-wrap}</style>
+<h1>Verificação de telas</h1><pre id="results">Verificando…</pre><div id="screens"></div>
+<script>
+const widths=[320,375,390,430,768,820,1024,1440];const reports=[];
+widths.forEach(width=>{const label=document.createElement('h2');label.textContent=width+' px';screens.append(label);const frame=document.createElement('iframe');frame.width=width;frame.height=700;frame.title='Proposta em '+width+' pixels';frame.src='index.html';screens.append(frame);frame.onload=async()=>{const doc=frame.contentDocument;await doc.fonts.ready;const clipped=[...doc.querySelectorAll('h1,h2,h3,p,li,dd,a,button')].filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&(r.right>width+1||r.left< -1||el.scrollWidth>el.clientWidth+1)}).map(el=>el.tagName+': '+el.textContent.trim().slice(0,50));reports.push({width,documentWidth:doc.documentElement.scrollWidth,clipped});results.textContent=JSON.stringify(reports.sort((a,b)=>a.width-b.width),null,2)}});
+</script></html>

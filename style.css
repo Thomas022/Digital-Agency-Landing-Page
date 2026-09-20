@@ -214,6 +214,11 @@ body {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  white-space: nowrap;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--text-lg);
@@ -221,7 +226,19 @@ body {
   color: var(--color-text-primary);
 }
 
-.logo span {
+.logo .logo-name {
+  color: inherit;
+}
+
+.logo-symbol {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.logo-name span {
   color: var(--color-accent);
 }
 
@@ -912,4 +929,3 @@ textarea {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-
