@@ -7,8 +7,8 @@
     <meta name="description" content="A EsseDe Digital automatiza processos, conecta ferramentas e cria soluções de software e inteligência artificial para empresas em crescimento." />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://essede.com.br/" />
-    <link rel="icon" type="image/png" href="/Logo_pictures/essede-logo-transparent.png" />
-    <link rel="apple-touch-icon" href="/Logo_pictures/essede-logo.png" />
+    <link rel="icon" type="image/png" href="Logo_pictures/essede-logo-transparent.png" />
+    <link rel="apple-touch-icon" href="Logo_pictures/essede-logo.png" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="EsseDe Digital" />
@@ -41,19 +41,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link href="style.css" rel="stylesheet" />
+    <link href="style.css?v=interactive-1" rel="stylesheet" />
   </head>
   <body>
+<a class="skip-link" href="#top">Pular para o conteúdo</a>
     <!-- SECTION: Header -->
     <header class="site-header">
       <div class="container header-inner">
         <a href="#top" class="logo"><img class="logo-symbol" src="Logo_pictures/essede-logo-transparent.png" alt="" width="40" height="40" /><span class="logo-name">EsseDe<span>Digital</span></span></a>
         <nav class="nav" aria-label="Navegação principal">
-          <button class="nav-toggle" aria-expanded="false" aria-label="Abrir ou fechar menu">
+          <button class="nav-toggle" aria-controls="main-navigation" aria-expanded="false" aria-label="Abrir ou fechar menu">
             <span></span><span></span>
           </button>
-          <ul class="nav-list">
-            <li><a href="#services">Serviços</a></li>
+          <ul class="nav-list" id="main-navigation">
+            <li><details class="service-menu"><summary>Serviços</summary><div class="service-dropdown"><a href="#services">Consultoria Digital</a><a href="#software">Software sob medida</a><a href="#opportunities">Mapa de oportunidades</a></div></details></li>
             <li><a href="#about">Por que nós</a></li>
             <li><a href="#case-studies">Case Studies</a></li>
             <li><a href="#pricing">Planos</a></li>
@@ -76,7 +77,7 @@
             </p>
             <div class="hero-actions">
               <a href="#contact" class="btn btn-primary">Agendar conversa inicial</a>
-              <button class="btn btn-ghost btn-inline" data-scroll-target="#case-studies">Ver Case Studies</button>
+              <a class="btn btn-ghost" href="#opportunities">Descobrir oportunidades</a>
             </div>
             <dl class="hero-metrics" aria-label="Principais resultados dos nossos clientes">
               <div>
@@ -159,6 +160,24 @@
           </div>
         </div>
       </section>
+
+
+      <section id="software" class="section section-alt" aria-labelledby="software-title">
+        <div class="container about-grid">
+          <div><p class="eyebrow">Software sob medida</p><h2 id="software-title">Seu jeito de trabalhar. Um sistema que acompanha.</h2><p>Conecte pedidos, clientes e indicadores em uma experiência feita para a sua operação. Explore abaixo uma demonstração com dados ilustrativos.</p><a class="btn btn-primary" href="#contact">Conversar sobre meu projeto</a></div>
+          <div class="card demo"><div class="demo-heading"><span class="logo small">EsseDe<span>Workspace</span></span><span class="demo-badge">Demonstração</span></div>
+            <div class="demo-tabs" role="group" aria-label="Módulos da demonstração"><button class="btn btn-secondary" data-module="orders" aria-pressed="true">Pedidos</button><button class="btn btn-secondary" data-module="clients" aria-pressed="false">Clientes</button><button class="btn btn-secondary" data-module="reports" aria-pressed="false">Relatórios</button></div>
+            <div class="field"><label for="demo-search">Buscar na demonstração</label><input id="demo-search" type="search" placeholder="Busque um pedido ou cliente…" /></div>
+            <div id="demo-results" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+      <section id="opportunities" class="section" aria-labelledby="opportunities-title">
+        <div class="container"><header class="section-header"><p class="eyebrow">Mapa de oportunidades</p><h2 id="opportunities-title">Encontre o próximo passo da sua operação.</h2><p>Explore exemplos por impacto e esforço. Depois, faça uma avaliação rápida para identificar um ponto de partida.</p></header>
+        <div class="about-grid"><div class="card"><p class="eyebrow">Impacto × esforço</p><div class="opportunity-map" role="group" aria-label="Exemplos de oportunidades"><button data-opportunity="0" aria-pressed="true"><strong>01</strong> Alto impacto<br>Menor esforço</button><button data-opportunity="1" aria-pressed="false"><strong>02</strong> Alto impacto<br>Maior esforço</button><button data-opportunity="2" aria-pressed="false"><strong>03</strong> Menor impacto<br>Menor esforço</button><button data-opportunity="3" aria-pressed="false"><strong>04</strong> Menor impacto<br>Maior esforço</button></div><div id="opportunity-detail" aria-live="polite"><h3>Comece pelas tarefas repetitivas</h3><p>Centralize solicitações e automatize a classificação de pedidos para reduzir redigitação e retrabalho.</p></div></div>
+        <form id="diagnostic" class="card"><h3>Seu diagnóstico inicial</h3><p>Uma orientação por regras, gratuita e feita neste navegador. Não utiliza IA nem envia suas respostas.</p><div class="field"><label for="bottleneck">Onde está o maior gargalo?</label><select id="bottleneck" required><option value="">Selecione</option><option value="manual">Tarefas manuais e repetitivas</option><option value="systems">Sistemas que não se conectam</option><option value="data">Dados dispersos e pouca visibilidade</option><option value="service">Atendimento com alto volume</option></select></div><div class="field"><label for="hours">Horas gastas por semana nesse processo</label><input id="hours" type="number" min="1" max="10000" required placeholder="Ex.: 20" /></div><div class="field"><label for="readiness">Como estão os dados desse processo?</label><select id="readiness" required><option value="">Selecione</option><option value="ready">Organizados em ferramentas digitais</option><option value="mixed">Espalhados em planilhas e mensagens</option><option value="paper">Principalmente em papel ou sem padrão</option></select></div><button class="btn btn-primary" type="submit">Gerar minha orientação</button><div id="diagnostic-result" role="status" tabindex="-1" hidden></div><button class="btn btn-secondary" id="use-diagnostic" type="button" hidden>Levar diagnóstico para a conversa</button></form></div></div>
+      </section>
+      <section class="section section-alt" aria-labelledby="comparison-title"><div class="container"><header class="section-header"><p class="eyebrow">Uma operação mais inteligente</p><h2 id="comparison-title">Menos trabalho repetitivo. Mais espaço para crescer.</h2></header><div class="comparison-wrap" role="region" aria-label="Comparação de operações" tabindex="0"><table class="comparison"><thead><tr><th scope="col">Na prática</th><th scope="col">Operação manual</th><th scope="col">Com soluções EsseDe</th></tr></thead><tbody><tr><th scope="row">Processos</th><td>Informações copiadas entre ferramentas</td><td>Fluxos integrados e rastreáveis</td></tr><tr><th scope="row">Equipe</th><td>Tempo dedicado a tarefas repetitivas</td><td>Mais tempo para decisões e clientes</td></tr><tr><th scope="row">Dados</th><td>Planilhas com versões diferentes</td><td>Indicadores centralizados</td></tr><tr><th scope="row">Software</th><td>Adaptação da rotina à ferramenta</td><td>Sistemas construídos para a operação</td></tr></tbody></table></div></div></section>
 
       <!-- SECTION: About / Why Us -->
       <section id="about" class="section section-alt" aria-labelledby="about-heading">
@@ -399,6 +418,7 @@
           </form>
         </div>
       </section>
+<section class="section" aria-labelledby="faq-title"><div class="container"><header class="section-header"><p class="eyebrow">Dúvidas frequentes</p><h2 id="faq-title">Antes de dar o próximo passo.</h2></header><div class="faq"><details><summary>Preciso trocar os sistemas que já uso?</summary><p>Partimos das suas ferramentas atuais. A avaliação identifica o que integrar, preservar ou substituir.</p></details><details><summary>Quanto custa um projeto?</summary><p>O orçamento depende do escopo, das integrações e do acompanhamento. Use o formulário para solicitar uma proposta adequada à sua operação.</p></details><details><summary>O diagnóstico é uma avaliação definitiva?</summary><p>Não. Esta versão oferece uma orientação inicial baseada nas respostas. A viabilidade e os resultados esperados precisam de avaliação técnica.</p></details><details><summary>Como agendo uma conversa?</summary><p>Preencha o formulário de contato. A equipe poderá combinar um horário com você por e-mail; o envio não reserva automaticamente uma reunião.</p></details></div></div></section>
     </main>
 
     <!-- SECTION: Footer -->
@@ -414,6 +434,8 @@
       </div>
     </footer>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="script.js?v=emailjs-20260919-1"></script>
+
+
+  <script src="script.js?v=interactive-1"></script>
   </body>
 </html>

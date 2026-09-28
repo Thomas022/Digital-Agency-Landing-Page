@@ -3,7 +3,7 @@ function smoothScrollTo(targetSelector) {
   const target = document.querySelector(targetSelector);
   if (!target) return;
   const y = target.getBoundingClientRect().top + window.scrollY - 80;
-  window.scrollTo({ top: y, behavior: "smooth" });
+  window.scrollTo({ top: y, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
 }
 
 // SECTION: Navigation
@@ -109,3 +109,63 @@ if (contactForm) {
     }
   });
 }
+
+// Demonstração local: dados fictícios, sem conexões com sistemas de clientes.
+const demoData = {
+  orders: [['Pedido #1042', 'Em análise'], ['Pedido #1043', 'Aprovado'], ['Pedido #1044', 'Concluído']],
+  clients: [['Cliente Aurora', 'Ativo'], ['Cliente Horizonte', 'Em implantação'], ['Cliente Norte', 'Ativo']],
+  reports: [['Pedidos neste mês', '128'], ['Processos automatizados', '8'], ['Integrações conectadas', '4']]
+};
+let activeModule = 'orders';
+const search = document.getElementById('demo-search');
+function renderDemo() {
+  const results = document.getElementById('demo-results');
+  results.replaceChildren();
+  const query = search.value.toLocaleLowerCase('pt-BR').trim();
+  const rows = demoData[activeModule].filter(row => row.join(' ').toLocaleLowerCase('pt-BR').includes(query));
+  for (const row of rows) {
+    const item = document.createElement('div'); item.className = 'demo-row';
+    for (const value of row) { const cell = document.createElement('span'); cell.textContent = value; item.append(cell); }
+    results.append(item);
+  }
+  if (!rows.length) results.textContent = 'Nenhum resultado. Tente outro termo.';
+}
+document.querySelectorAll('[data-module]').forEach(button => button.addEventListener('click', () => {
+  activeModule = button.dataset.module; search.value = '';
+  document.querySelectorAll('[data-module]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  renderDemo();
+}));
+search.addEventListener('input', renderDemo); renderDemo();
+const opportunities = [
+ ['Comece pelas tarefas repetitivas', 'Centralize solicitações e automatize a classificação de pedidos para reduzir redigitação e retrabalho.'],
+ ['Integre a operação de ponta a ponta', 'Conecte CRM, estoque e financeiro. O impacto pode ser alto, mas exige planejamento das integrações e qualidade dos dados.'],
+ ['Simplifique a rotina de acompanhamento', 'Reúna os indicadores já disponíveis em um resumo periódico para reduzir consultas e reuniões de atualização.'],
+ ['Valide antes de investir', 'Um portal completo pode exigir mais esforço do que o retorno inicial justifica. Teste a necessidade com um piloto menor.']
+];
+document.querySelectorAll('[data-opportunity]').forEach(button => button.addEventListener('click', () => {
+ const [title, description] = opportunities[Number(button.dataset.opportunity)];
+ document.querySelector('#opportunity-detail h3').textContent = title;
+ document.querySelector('#opportunity-detail p').textContent = description;
+ document.querySelectorAll('[data-opportunity]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+}));
+const diagnostic = document.getElementById('diagnostic');
+let diagnosticSummary = '';
+diagnostic.addEventListener('submit', event => {
+ event.preventDefault(); if (!diagnostic.reportValidity()) return;
+ const recommendations = { manual: 'Automação de tarefas repetitivas', systems: 'Integração entre sistemas', data: 'Centralização de dados e indicadores', service: 'Triagem assistida de atendimento' };
+ const hours = Number(document.getElementById('hours').value);
+ const readiness = document.getElementById('readiness').value;
+ const next = readiness === 'ready' ? 'Comece com um piloto em um único processo e meça o resultado antes de ampliar.' : 'Comece organizando e padronizando os dados antes de automatizar o processo.';
+ diagnosticSummary = 'Ponto de partida: ' + recommendations[document.getElementById('bottleneck').value] + '. Carga informada: ' + hours + ' horas por semana. ' + next + ' Esta orientação não estima economia nem substitui uma avaliação técnica.';
+ const result = document.getElementById('diagnostic-result'); result.textContent = diagnosticSummary; result.hidden = false;
+ document.getElementById('use-diagnostic').hidden = false; result.focus();
+});
+diagnostic.addEventListener('input', () => { diagnosticSummary = ''; document.getElementById('diagnostic-result').hidden = true; document.getElementById('use-diagnostic').hidden = true; });
+document.getElementById('use-diagnostic').addEventListener('click', () => {
+ const message = document.getElementById('message');
+ if (!message.value.includes(diagnosticSummary)) message.value = [message.value, diagnosticSummary].filter(Boolean).join('\n\n');
+ smoothScrollTo('#contact'); message.focus({preventScroll: true});
+});
+const serviceMenu = document.querySelector('.service-menu');
+document.addEventListener('click', event => { if (!serviceMenu.contains(event.target) || event.target.closest('.service-dropdown a')) serviceMenu.open = false; });
+document.addEventListener('keydown', event => { if (event.key === 'Escape') { if (serviceMenu.open) { serviceMenu.open = false; serviceMenu.querySelector('summary').focus(); } if (navList.classList.contains('is-open')) { navList.classList.remove('is-open'); navToggle.setAttribute('aria-expanded', 'false'); navToggle.focus(); } } });
