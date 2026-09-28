@@ -41,7 +41,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link href="style.css?v=interactive-1" rel="stylesheet" />
+    <link href="style.css?v=guided-2" rel="stylesheet" />
   </head>
   <body>
 <a class="skip-link" href="#top">Pular para o conteúdo</a>
@@ -95,27 +95,25 @@
             </dl>
           </div>
 
-          <div class="hero-panel shadow-dramatic gradient-border">
-            <div class="hero-panel-header">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <p>Prévia do projeto de automação</p>
+          <section class="hero-panel guided-panel gradient-border" aria-labelledby="guided-title">
+            <div class="guided-top"><span class="guided-label">NA PRÁTICA</span><span class="guided-example">Exemplo ilustrativo</span></div>
+            <h2 id="guided-title">Veja como sua operação<br>pode funcionar.</h2>
+            <p class="guided-intro">Escolha um desafio e acompanhe a transformação.</p>
+            <div class="challenge-picker" role="group" aria-label="Escolha seu desafio">
+              <button type="button" data-challenge="rework" aria-pressed="true">Retrabalho</button>
+              <button type="button" data-challenge="systems" aria-pressed="false">Sistemas desconectados</button>
+              <button type="button" data-challenge="visibility" aria-pressed="false">Falta de visibilidade</button>
             </div>
-            <div class="hero-flow">
-              <div class="flow-node flow-node-input">
-                <h3>Entradas</h3>
-                <p>E-mails, formulários e atualizações do CRM</p>
-              </div>
-              <div class="flow-node flow-node-logic">
-                <h3>Núcleo de automação</h3>
-                <p>Direciona, valida e enriquece dados com IA</p>
-              </div>
-              <div class="flow-node flow-node-output">
-                <h3>Ações</h3>
-                <p>Chamados, alertas, painéis e relatórios</p>
-              </div>
+            <div class="guided-slide" aria-live="polite" aria-atomic="true">
+              <div class="guided-step"><span id="guided-number">01</span><span id="guided-phase">O ponto de partida</span></div>
+              <h3 id="guided-heading">A solicitação chega.</h3>
+              <p id="guided-description">Um pedido chega por e-mail. Alguém precisa ler, conferir e copiar as informações para uma planilha.</p>
+              <div class="guided-art" aria-hidden="true"><span id="guided-source">E-mail</span><span class="guided-arrow">→</span><span id="guided-destination">Digitação manual</span></div>
+              <p class="guided-insight"><span id="guided-insight-label">O desafio</span><span id="guided-insight">A mesma informação passa por várias mãos.</span></p>
             </div>
-            <p class="hero-panel-note">Projetamos uma arquitetura de automação sob medida nos seus primeiros 10 dias.</p>
-          </div>
+            <div class="guided-controls"><button type="button" id="guided-prev" aria-label="Etapa anterior" disabled>←</button><div class="guided-progress"><span id="guided-counter">1 de 3</span><div aria-hidden="true"><i class="current"></i><i></i><i></i></div></div><button type="button" id="guided-next" aria-label="Próxima etapa">→</button></div>
+            <a class="guided-cta" href="#contact">Quero aplicar na minha empresa <span aria-hidden="true">↗</span></a>
+          </section>
         </div>
       </section>
 
@@ -436,6 +434,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 
-  <script src="script.js?v=interactive-1"></script>
+
+  <script src="script.js?v=guided-2"></script>
   </body>
 </html>

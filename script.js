@@ -169,3 +169,41 @@ document.getElementById('use-diagnostic').addEventListener('click', () => {
 const serviceMenu = document.querySelector('.service-menu');
 document.addEventListener('click', event => { if (!serviceMenu.contains(event.target) || event.target.closest('.service-dropdown a')) serviceMenu.open = false; });
 document.addEventListener('keydown', event => { if (event.key === 'Escape') { if (serviceMenu.open) { serviceMenu.open = false; serviceMenu.querySelector('summary').focus(); } if (navList.classList.contains('is-open')) { navList.classList.remove('is-open'); navToggle.setAttribute('aria-expanded', 'false'); navToggle.focus(); } } });
+
+const guidedStories = {
+ rework: [
+  ['A solicitação chega.', 'Um pedido chega por e-mail. Alguém precisa ler, conferir e copiar as informações para uma planilha.', 'E-mail', 'Digitação manual', 'A mesma informação passa por várias mãos.'],
+  ['Os dados ganham estrutura.', 'A automação extrai os campos do pedido e verifica o que está faltando. Casos incompletos seguem para revisão humana.', 'Pedido recebido', 'Dados validados', 'A equipe revisa as exceções, sem redigitar tudo.'],
+  ['A equipe decide e acompanha.', 'O pedido organizado fica disponível no sistema, com responsável e status. A equipe acompanha o andamento em um só lugar.', 'Pedido organizado', 'Próxima ação', 'Menos cópias manuais e mais rastreabilidade.']
+ ],
+ systems: [
+  ['A venda é registrada.', 'Uma venda entra no CRM, mas estoque e financeiro ainda precisam receber as mesmas informações separadamente.', 'CRM', 'Repasse manual', 'Ferramentas isoladas deixam a operação esperando.'],
+  ['Os sistemas se conectam.', 'Uma integração envia os dados da venda ao estoque e ao financeiro, com regras de validação e registro de falhas.', 'CRM', 'Estoque + financeiro', 'Cada área recebe os dados necessários ao seu trabalho.'],
+  ['O andamento fica visível.', 'A equipe consulta o status do pedido e recebe alertas sobre pendências, sem precisar perguntar a cada departamento.', 'Status integrado', 'Equipe informada', 'Mais clareza sobre o que já aconteceu e o que falta fazer.']
+ ],
+ visibility: [
+  ['As informações estão dispersas.', 'Para entender a operação, a equipe reúne planilhas, mensagens e relatórios de ferramentas diferentes.', 'Várias fontes', 'Conferência manual', 'Montar o relatório consome o tempo de analisar.'],
+  ['Os indicadores se organizam.', 'Os dados relevantes são reunidos e padronizados. Cada indicador tem uma fonte e uma frequência de atualização definidas.', 'Dados dispersos', 'Visão centralizada', 'A equipe passa a consultar uma referência comum.'],
+  ['As prioridades ficam claras.', 'Um painel destaca atrasos, volumes e pendências. A equipe identifica onde agir e acompanha a evolução dos indicadores.', 'Indicadores', 'Decisões informadas', 'Mais contexto para decidir o próximo passo.']
+ ]
+};
+let guidedChallenge = 'rework';
+let guidedIndex = 0;
+function renderGuidedStory() {
+ const story = guidedStories[guidedChallenge][guidedIndex];
+ ['heading','description','source','destination','insight'].forEach((key,index) => { document.getElementById('guided-'+key).textContent = story[index]; });
+ document.getElementById('guided-number').textContent = String(guidedIndex + 1).padStart(2,'0');
+ document.getElementById('guided-phase').textContent = ['O ponto de partida','Como a EsseDe pode ajudar','O resultado na rotina'][guidedIndex];
+ document.getElementById('guided-insight-label').textContent = ['O desafio','A mudança','O benefício'][guidedIndex];
+ document.getElementById('guided-counter').textContent = (guidedIndex + 1) + ' de 3';
+ document.getElementById('guided-prev').disabled = guidedIndex === 0;
+ document.getElementById('guided-next').disabled = guidedIndex === 2;
+ document.querySelectorAll('.guided-progress i').forEach((item,index) => item.classList.toggle('current', index === guidedIndex));
+}
+document.querySelectorAll('[data-challenge]').forEach(button => button.addEventListener('click', () => {
+ guidedChallenge = button.dataset.challenge; guidedIndex = 0;
+ document.querySelectorAll('[data-challenge]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+ renderGuidedStory();
+}));
+document.getElementById('guided-prev').addEventListener('click', () => { guidedIndex = Math.max(0, guidedIndex - 1); renderGuidedStory(); });
+document.getElementById('guided-next').addEventListener('click', () => { guidedIndex = Math.min(2, guidedIndex + 1); renderGuidedStory(); });

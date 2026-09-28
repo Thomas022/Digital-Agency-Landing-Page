@@ -1013,6 +1013,37 @@ summary { cursor: pointer; }
 @media(max-width: 400px) { :root { --page-padding-x: 16px; } .btn { white-space: normal; } .demo-tabs { gap: 4px; } .demo-tabs .btn { font-size: 12px; padding: 8px; } }
 @media(prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 
+
+/* Demonstração guiada do hero, exclusiva da versão de teste. */
+.guided-panel { padding: 28px; min-width: 0; box-shadow: var(--shadow-strong); }
+.guided-top { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+.guided-label { color:var(--color-accent); font-size:11px; letter-spacing:.18em; font-weight:600; }
+.guided-example { color:var(--color-text-soft); font-size:11px; }
+.guided-panel h2 { font-family:var(--font-display); font-size:clamp(1.4rem,2.2vw,1.8rem); line-height:1.2; letter-spacing:-.04em; margin:20px 0 10px; }
+.guided-intro { font-size:13px; color:var(--color-text-muted); line-height:1.6; margin:0 0 20px; }
+.challenge-picker { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+.challenge-picker button { font:inherit; font-size:11px; padding:9px 11px; border:1px solid var(--color-border-subtle); border-radius:var(--radius-pill); background:transparent; color:var(--color-text-muted); cursor:pointer; }
+.guided-slide { border-top:1px solid var(--color-border-subtle); padding-top:20px; min-height:290px; }
+.guided-step { display:flex; align-items:center; gap:12px; color:var(--color-text-soft); font-size:12px; }
+#guided-number { color:var(--color-accent); font-family:var(--font-display); font-size:26px; }
+.guided-slide h3 { font-family:var(--font-display); font-size:21px; margin:12px 0 8px; letter-spacing:-.03em; }
+#guided-description { font-size:13px; line-height:1.7; color:var(--color-text-muted); min-height:66px; margin:0; }
+.guided-art { display:flex; align-items:center; justify-content:space-between; gap:10px; margin:20px 0; padding:16px 12px; background:var(--color-accent-soft); border:1px solid rgba(56,189,248,.25); border-radius:10px; font-size:12px; }
+.guided-art > span:not(.guided-arrow) { flex:1; text-align:center; }
+.guided-arrow { color:var(--color-accent); font-size:22px; }
+.guided-insight { font-size:12px; line-height:1.6; color:var(--color-text-muted); min-height:58px; margin:0; }
+#guided-insight-label { display:block; color:var(--color-text-primary); font-weight:600; margin-bottom:4px; }
+.guided-controls { display:flex; justify-content:space-between; align-items:center; margin-top:20px; }
+.guided-controls button { width:44px; height:44px; border-radius:50%; border:1px solid var(--color-border-subtle); background:transparent; color:var(--color-text-primary); font-size:20px; cursor:pointer; }
+.guided-controls button:hover:not(:disabled) { border-color:var(--color-accent); color:var(--color-accent); }
+.guided-controls button:disabled { opacity:.3; cursor:default; }
+.guided-progress { text-align:center; font-size:12px; color:var(--color-text-soft); }
+.guided-progress > div { display:flex; gap:5px; margin-top:8px; }
+.guided-progress i { display:block; width:24px; height:3px; background:var(--color-border-subtle); border-radius:3px; }
+.guided-progress i.current { background:var(--color-accent); }
+.guided-cta { display:flex; justify-content:space-between; gap:12px; border-top:1px solid var(--color-border-subtle); margin-top:20px; padding-top:16px; color:var(--color-accent); font-size:12px; }
+@media(max-width:400px) { .guided-panel { padding:20px; } .guided-slide { min-height:320px; } }
+
 </style>
   </head>
   <body>
@@ -1067,27 +1098,25 @@ summary { cursor: pointer; }
             </dl>
           </div>
 
-          <div class="hero-panel shadow-dramatic gradient-border">
-            <div class="hero-panel-header">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <p>Prévia do projeto de automação</p>
+          <section class="hero-panel guided-panel gradient-border" aria-labelledby="guided-title">
+            <div class="guided-top"><span class="guided-label">NA PRÁTICA</span><span class="guided-example">Exemplo ilustrativo</span></div>
+            <h2 id="guided-title">Veja como sua operação<br>pode funcionar.</h2>
+            <p class="guided-intro">Escolha um desafio e acompanhe a transformação.</p>
+            <div class="challenge-picker" role="group" aria-label="Escolha seu desafio">
+              <button type="button" data-challenge="rework" aria-pressed="true">Retrabalho</button>
+              <button type="button" data-challenge="systems" aria-pressed="false">Sistemas desconectados</button>
+              <button type="button" data-challenge="visibility" aria-pressed="false">Falta de visibilidade</button>
             </div>
-            <div class="hero-flow">
-              <div class="flow-node flow-node-input">
-                <h3>Entradas</h3>
-                <p>E-mails, formulários e atualizações do CRM</p>
-              </div>
-              <div class="flow-node flow-node-logic">
-                <h3>Núcleo de automação</h3>
-                <p>Direciona, valida e enriquece dados com IA</p>
-              </div>
-              <div class="flow-node flow-node-output">
-                <h3>Ações</h3>
-                <p>Chamados, alertas, painéis e relatórios</p>
-              </div>
+            <div class="guided-slide" aria-live="polite" aria-atomic="true">
+              <div class="guided-step"><span id="guided-number">01</span><span id="guided-phase">O ponto de partida</span></div>
+              <h3 id="guided-heading">A solicitação chega.</h3>
+              <p id="guided-description">Um pedido chega por e-mail. Alguém precisa ler, conferir e copiar as informações para uma planilha.</p>
+              <div class="guided-art" aria-hidden="true"><span id="guided-source">E-mail</span><span class="guided-arrow">→</span><span id="guided-destination">Digitação manual</span></div>
+              <p class="guided-insight"><span id="guided-insight-label">O desafio</span><span id="guided-insight">A mesma informação passa por várias mãos.</span></p>
             </div>
-            <p class="hero-panel-note">Projetamos uma arquitetura de automação sob medida nos seus primeiros 10 dias.</p>
-          </div>
+            <div class="guided-controls"><button type="button" id="guided-prev" aria-label="Etapa anterior" disabled>←</button><div class="guided-progress"><span id="guided-counter">1 de 3</span><div aria-hidden="true"><i class="current"></i><i></i><i></i></div></div><button type="button" id="guided-next" aria-label="Próxima etapa">→</button></div>
+            <a class="guided-cta" href="#contact">Quero aplicar na minha empresa <span aria-hidden="true">↗</span></a>
+          </section>
         </div>
       </section>
 
@@ -1581,6 +1610,47 @@ document.getElementById('use-diagnostic').addEventListener('click', () => {
 const serviceMenu = document.querySelector('.service-menu');
 document.addEventListener('click', event => { if (!serviceMenu.contains(event.target) || event.target.closest('.service-dropdown a')) serviceMenu.open = false; });
 document.addEventListener('keydown', event => { if (event.key === 'Escape') { if (serviceMenu.open) { serviceMenu.open = false; serviceMenu.querySelector('summary').focus(); } if (navList.classList.contains('is-open')) { navList.classList.remove('is-open'); navToggle.setAttribute('aria-expanded', 'false'); navToggle.focus(); } } });
+
+</script>
+<script>
+
+const guidedStories = {
+ rework: [
+  ['A solicitação chega.', 'Um pedido chega por e-mail. Alguém precisa ler, conferir e copiar as informações para uma planilha.', 'E-mail', 'Digitação manual', 'A mesma informação passa por várias mãos.'],
+  ['Os dados ganham estrutura.', 'A automação extrai os campos do pedido e verifica o que está faltando. Casos incompletos seguem para revisão humana.', 'Pedido recebido', 'Dados validados', 'A equipe revisa as exceções, sem redigitar tudo.'],
+  ['A equipe decide e acompanha.', 'O pedido organizado fica disponível no sistema, com responsável e status. A equipe acompanha o andamento em um só lugar.', 'Pedido organizado', 'Próxima ação', 'Menos cópias manuais e mais rastreabilidade.']
+ ],
+ systems: [
+  ['A venda é registrada.', 'Uma venda entra no CRM, mas estoque e financeiro ainda precisam receber as mesmas informações separadamente.', 'CRM', 'Repasse manual', 'Ferramentas isoladas deixam a operação esperando.'],
+  ['Os sistemas se conectam.', 'Uma integração envia os dados da venda ao estoque e ao financeiro, com regras de validação e registro de falhas.', 'CRM', 'Estoque + financeiro', 'Cada área recebe os dados necessários ao seu trabalho.'],
+  ['O andamento fica visível.', 'A equipe consulta o status do pedido e recebe alertas sobre pendências, sem precisar perguntar a cada departamento.', 'Status integrado', 'Equipe informada', 'Mais clareza sobre o que já aconteceu e o que falta fazer.']
+ ],
+ visibility: [
+  ['As informações estão dispersas.', 'Para entender a operação, a equipe reúne planilhas, mensagens e relatórios de ferramentas diferentes.', 'Várias fontes', 'Conferência manual', 'Montar o relatório consome o tempo de analisar.'],
+  ['Os indicadores se organizam.', 'Os dados relevantes são reunidos e padronizados. Cada indicador tem uma fonte e uma frequência de atualização definidas.', 'Dados dispersos', 'Visão centralizada', 'A equipe passa a consultar uma referência comum.'],
+  ['As prioridades ficam claras.', 'Um painel destaca atrasos, volumes e pendências. A equipe identifica onde agir e acompanha a evolução dos indicadores.', 'Indicadores', 'Decisões informadas', 'Mais contexto para decidir o próximo passo.']
+ ]
+};
+let guidedChallenge = 'rework';
+let guidedIndex = 0;
+function renderGuidedStory() {
+ const story = guidedStories[guidedChallenge][guidedIndex];
+ ['heading','description','source','destination','insight'].forEach((key,index) => { document.getElementById('guided-'+key).textContent = story[index]; });
+ document.getElementById('guided-number').textContent = String(guidedIndex + 1).padStart(2,'0');
+ document.getElementById('guided-phase').textContent = ['O ponto de partida','Como a EsseDe pode ajudar','O resultado na rotina'][guidedIndex];
+ document.getElementById('guided-insight-label').textContent = ['O desafio','A mudança','O benefício'][guidedIndex];
+ document.getElementById('guided-counter').textContent = (guidedIndex + 1) + ' de 3';
+ document.getElementById('guided-prev').disabled = guidedIndex === 0;
+ document.getElementById('guided-next').disabled = guidedIndex === 2;
+ document.querySelectorAll('.guided-progress i').forEach((item,index) => item.classList.toggle('current', index === guidedIndex));
+}
+document.querySelectorAll('[data-challenge]').forEach(button => button.addEventListener('click', () => {
+ guidedChallenge = button.dataset.challenge; guidedIndex = 0;
+ document.querySelectorAll('[data-challenge]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+ renderGuidedStory();
+}));
+document.getElementById('guided-prev').addEventListener('click', () => { guidedIndex = Math.max(0, guidedIndex - 1); renderGuidedStory(); });
+document.getElementById('guided-next').addEventListener('click', () => { guidedIndex = Math.min(2, guidedIndex + 1); renderGuidedStory(); });
 
 </script>
 </body>
